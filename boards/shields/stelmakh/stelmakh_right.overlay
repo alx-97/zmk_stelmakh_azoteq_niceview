@@ -20,7 +20,6 @@
         ;
 };
 
-// Enable GPIO controllers
 &gpio0 {
     status = "okay";
 };
@@ -41,12 +40,10 @@
         reg = <0x74>;
         status = "okay";
 
-        /* GPIO connections */
-        rdy-gpios = <&pro_micro 21 GPIO_ACTIVE_HIGH>;  /* Ready pin */
-        rst-gpios = <&pro_micro 20 GPIO_ACTIVE_HIGH>;  /* Reset pin */
+        rdy-gpios = <&pro_micro 21 GPIO_ACTIVE_HIGH>;
+        rst-gpios = <&pro_micro 20 GPIO_ACTIVE_HIGH>;
         enable-power-management;
 
-        /* Gesture settings */
         sensitivity = <100>;
         scroll-sensitivity = <50>;
         filter-settings=<0x0B>;
@@ -61,25 +58,9 @@
 
 // ─────────────────────────────────────────────────────────────
 // WS2812 RGB Underglow
-// Пин данных: D0 = P0.08 (стандарт Sofle Choc)
-// Если лента подключена к другому пину — замени 0, 8 на нужные
-// Количество светодиодов: chain-length = <35> (Sofle Choc стандарт)
+// Пин P1.12 уже определён в stelmakh-pinctrl.dtsi (spi3)
+// Здесь только подключаем устройство — &pinctrl не дублируем
 // ─────────────────────────────────────────────────────────────
-&pinctrl {
-    spi3_default: spi3_default {
-        group1 {
-            psels = <NRF_PSEL(SPIM_MOSI, 0, 8)>;
-        };
-    };
-
-    spi3_sleep: spi3_sleep {
-        group1 {
-            psels = <NRF_PSEL(SPIM_MOSI, 0, 8)>;
-            low-power-enable;
-        };
-    };
-};
-
 &spi3 {
     compatible = "nordic,nrf-spim";
     status = "okay";
@@ -90,13 +71,9 @@
 
     led_strip: ws2812@0 {
         compatible = "worldsemi,ws2812-spi";
-
-        /* SPI */
         reg = <0>;
         spi-max-frequency = <4000000>;
-
-        /* WS2812 */
-        chain-length = <35>; /* количество светодиодов — измени если другое */
+        chain-length = <35>; /* измени на реальное кол-во светодиодов */
         spi-one-frame = <0x70>;
         spi-zero-frame = <0x40>;
         color-mapping = <LED_COLOR_ID_GREEN
@@ -113,7 +90,6 @@
     split_inputs {
         #address-cells = <1>;
         #size-cells = <0>;
-
         tps43_split: tps43_split@0 {
             compatible = "zmk,input-split";
             reg = <0>;
