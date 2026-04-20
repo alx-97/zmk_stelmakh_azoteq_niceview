@@ -1,68 +1,8 @@
 layout: {zmk_keyboard: stelmakh}
 layers:
-  default:
-  - '`'
-  - '1'
-  - '2'
-  - '3'
-  - '4'
-  - '5'
-  - '6'
-  - '7'
-  - '8'
-  - '9'
-  - '0'
-  - '-'
-  - TAB
-  - Q
-  - W
-  - E
-  - R
-  - T
-  - Y
-  - U
-  - I
-  - O
-  - P
-  - '='
-  - LEFT SHIFT
-  - A
-  - S
-  - D
-  - F
-  - G
-  - H
-  - J
-  - K
-  - L
-  - ;
-  - {t: '''', h: RIGHT SHIFT}
-  - LCTRL
-  - Z
-  - X
-  - C
-  - V
-  - B
-  - MUTE
-  - RGB TOG
-  - N
-  - M
-  - ','
-  - .
-  - /
-  - {t: \, h: RCTRL}
-  - ESCAPE
-  - LEFT GUI
-  - DELETE
-  - lower
-  - SPACE
-  - ENTER
-  - raise
-  - BACKSPACE
-  - RGUI
-  - RIGHT ALT
+  default: [ESC, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '`', TAB, Q, W, E, R, T, Y, U, I, O, P, '[', LSHFT, A, S, D, F, G, H, J, K, L, ;, '''', LEFT CONTROL,
+    Z, X, C, V, B, MUTE, '', N, M, ',', ., /, ']', LEFT CONTROL, LWIN, LALT, lower, ENTER, BACKSPACE, SPACE, LEFT ALT, '-', '=']
   lower:
-  - {t: ▽, type: trans}
   - F1
   - F2
   - F3
@@ -74,43 +14,44 @@ layers:
   - F9
   - F10
   - F11
-  - '`'
+  - F12
+  - F12
   - '1'
-  - '2'
+  - UP
   - '3'
   - '4'
   - '5'
-  - '6'
-  - '7'
-  - '8'
-  - '9'
-  - '0'
-  - F12
-  - KP NUMLOCK
-  - '!'
-  - '@'
-  - '#'
-  - $
-  - '%'
-  - ^
-  - '&'
-  - KP MULTIPLY
-  - (
-  - )
-  - '|'
+  - RGB ON
+  - RGB OFF
+  - RGB HUI
+  - RGB HUD
+  - RGB SAI
+  - RGB SAD
   - {t: ▽, type: trans}
-  - '='
-  - '-'
-  - KP PLUS
-  - '{'
-  - '}'
-  - PLAY PAUSE
+  - LEFT
+  - DOWN
+  - RIGHT
   - {t: ▽, type: trans}
-  - '['
-  - ']'
-  - ;
-  - ':'
-  - \
+  - {t: ▽, type: trans}
+  - RGB BRI
+  - RGB BRD
+  - RGB SPI
+  - RGB SPD
+  - RGB EFF
+  - RGB EFR
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - DEL
+  - {t: ▽, type: trans}
+  - ''
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -123,12 +64,12 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   raise:
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - BT CLR
+  - {t: BT, h: '0'}
+  - {t: BT, h: '1'}
+  - {t: BT, h: '2'}
+  - {t: BT, h: '3'}
+  - {t: BT, h: '4'}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -142,17 +83,17 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - PG UP
-  - HOME
+  - {t: ▽, type: trans}
   - UP
-  - END
+  - {t: ▽, type: trans}
+  - '0'
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - CAPSLOCK
+  - LALT
+  - LCTRL
+  - LSHFT
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - CLCK
   - PG DN
   - LEFT
   - DOWN
@@ -166,6 +107,7 @@ layers:
   - PASTE
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
+  - ''
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -179,12 +121,11 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {type: held}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   adjust:
-  - EP TOG
+  - BT CLR
   - {t: BT, h: '0'}
   - {t: BT, h: '1'}
   - {t: BT, h: '2'}
@@ -196,7 +137,7 @@ layers:
   - ''
   - ''
   - ''
-  - RGB TOG
+  - EP TOG
   - RGB HUD
   - RGB HUI
   - RGB SAD
@@ -220,13 +161,13 @@ layers:
   - ''
   - ''
   - ''
-  - BT CLR
   - ''
   - ''
   - ''
   - ''
   - ''
   - ''
+  - RGB TOG
   - ''
   - ''
   - ''
@@ -240,7 +181,7 @@ layers:
   - {type: held}
   - ''
   - ''
-  - {type: held}
+  - ''
   - ''
   - ''
   - ''
