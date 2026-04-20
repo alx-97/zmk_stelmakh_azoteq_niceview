@@ -193,6 +193,8 @@
 &kp LEFT_CONTROL  &kp Z   &kp X             &kp C     &kp V     &kp B   &kp C_MUTE    &none         &kp N          &kp M         &kp COMMA  &kp DOT  &kp FSLH  &kp RIGHT_BRACKET
                           &kp LEFT_CONTROL  &kp LWIN  &kp LALT  &mo 1   &kp ENTER     &kp BACKSPACE &kp SPACE      &kp LEFT_ALT  &kp MINUS  &kp EQUAL
             >;
+
+            sensor-bindings = <&inc_dec_kp C_BRI_UP C_BRI_DEC>;
         };
 
         lower_layer {
@@ -212,6 +214,8 @@
 &trans   &trans    &trans    &trans     &trans  &kp DEL  &trans   &none  &trans           &trans           &trans           &trans           &trans           &trans
                    &trans    &trans     &trans  &trans   &trans   &trans &trans           &trans           &trans           &trans
             >;
+
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         raise_layer {
@@ -231,6 +235,8 @@
 &trans      &kp K_UNDO    &kp K_CUT     &kp K_COPY    &kp K_PASTE   &trans       &trans    &none   &trans     &trans    &trans    &trans     &trans   &trans
                           &trans        &trans        &trans        &trans       &trans    &trans  &trans     &trans    &trans    &trans
             >;
+
+            sensor-bindings = <&inc_dec_kp PG_UP PG_DN>;
         };
 
         adjust_layer {
