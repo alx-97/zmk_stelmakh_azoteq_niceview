@@ -1,4 +1,6 @@
 #include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/led/led.h>
+#include <dt-bindings/pinctrl/nrf-pinctrl.h>
 #include "stelmakh.dtsi"
 
 &kscan0 {
@@ -12,7 +14,56 @@
         ;
 };
 
+// ─────────────────────────────────────────────────────────────
+// WS2812 RGB Underglow
+// Пин данных: D0 = P0.08 (стандарт Sofle Choc)
+// Если лента подключена к другому пину — замени 0, 8 на нужные
+// Количество светодиодов: chain-length = <35> (Sofle Choc стандарт)
+// ─────────────────────────────────────────────────────────────
+&pinctrl {
+    spi3_default: spi3_default {
+        group1 {
+            psels = <NRF_PSEL(SPIM_MOSI, 0, 8)>;
+        };
+    };
+
+    spi3_sleep: spi3_sleep {
+        group1 {
+            psels = <NRF_PSEL(SPIM_MOSI, 0, 8)>;
+            low-power-enable;
+        };
+    };
+};
+
+&spi3 {
+    compatible = "nordic,nrf-spim";
+    status = "okay";
+
+    pinctrl-0 = <&spi3_default>;
+    pinctrl-1 = <&spi3_sleep>;
+    pinctrl-names = "default", "sleep";
+
+    led_strip: ws2812@0 {
+        compatible = "worldsemi,ws2812-spi";
+
+        /* SPI */
+        reg = <0>;
+        spi-max-frequency = <4000000>;
+
+        /* WS2812 */
+        chain-length = <35>; /* количество светодиодов — измени если другое */
+        spi-one-frame = <0x70>;
+        spi-zero-frame = <0x40>;
+        color-mapping = <LED_COLOR_ID_GREEN
+                         LED_COLOR_ID_RED
+                         LED_COLOR_ID_BLUE>;
+    };
+};
+
 / {
+    chosen {
+        zmk,underglow = &led_strip;
+    };
 
     left_encoder: encoder_left {
         status = "okay";
@@ -20,8 +71,8 @@
         label = "LEFT_ENCODER";
         resolution = <4>;
         steps = <80>;
-        a-gpios = <&pro_micro 21 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;  // D21 = P0.31
-        b-gpios = <&pro_micro 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;  // D20 = P0.29
+        a-gpios = <&pro_micro 21 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        b-gpios = <&pro_micro 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
     };
 
     sensors {
@@ -32,7 +83,6 @@
     split_inputs {
         #address-cells = <1>;
         #size-cells = <0>;
-
         tps43_split: tps43_split@0 {
             compatible = "zmk,input-split";
             reg = <0>;
