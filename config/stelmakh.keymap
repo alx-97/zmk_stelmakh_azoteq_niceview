@@ -26,24 +26,20 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&kp LC(LEFT)>;
-            // <&kp LG(LEFT)>;  // Ctrl+Alt+Left (Linux)
-            // <&kp LC(LEFT)>;  // Cmd+Left (macOS)
         };
-        
+
         ws_right: workspace_right {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp LC(RIGHT)>;  // Cmd+Right (macOS)
+            bindings = <&kp LC(RIGHT)>;
         };
     };
-    
+
     mouse_buttons {
         compatible = "zmk,mouse-button-behaviors";
-        button-6 = <&ws_left>;  
-        button-7 = <&ws_right>; 
+        button-6 = <&ws_left>;
+        button-7 = <&ws_right>;
     };
-
-    // Activate ADJUST layer by pressing raise and lower
 
     conditional_layers {
         compatible = "zmk,conditional-layers";
@@ -54,6 +50,10 @@
         };
     };
 
+    // ───────────────────────────────────────────────
+    // Комбо-клавиши — оставлены от Stelmakh
+    // (привязаны к физическим позициям этой платы)
+    // ───────────────────────────────────────────────
     combos {
         compatible = "zmk,combos";
 
@@ -173,45 +173,65 @@
     keymap {
         compatible = "zmk,keymap";
 
+        // ╔══════════════════════════════════════════════════════════╗
+        // ║  DEFAULT — раскладка из Sofle                           ║
+        // ║  Изменения vs оригинальный stelmakh.keymap:             ║
+        // ║  • строка 0: ESC вместо GRAVE, GRAVE вместо MINUS      ║
+        // ║  • строка 1: LEFT_BRACKET вместо EQUAL                 ║
+        // ║  • строка 2: SQT вместо mt RIGHT_SHIFT SQT             ║
+        // ║  • строка 3: RIGHT_BRACKET вместо mt RCTRL BACKSLASH   ║
+        // ║  • thumb row: полностью заменён на sofle-вариант        ║
+        // ╚══════════════════════════════════════════════════════════╝
         default_layer {
             label = "default";
             bindings = <
-&kp GRAVE       &kp N1  &kp N2      &kp N3        &kp N4      &kp N5                                    &kp N6     &kp N7         &kp N8     &kp N9         &kp N0    &kp MINUS
-&kp TAB         &kp Q   &kp W       &kp E         &kp R       &kp T                                     &kp Y      &kp U          &kp I      &kp O          &kp P     &kp EQUAL
-&kp LEFT_SHIFT  &kp A   &kp S       &kp D         &kp F       &kp G                                     &kp H      &kp J          &kp K      &kp L          &kp SEMI  &mt RIGHT_SHIFT SQT
-&kp LCTRL       &kp Z   &kp X       &kp C         &kp V       &kp B      &kp C_MUTE    &rgb_ug RGB_TOG  &kp N      &kp M          &kp COMMA  &kp DOT        &kp FSLH  &mt RCTRL BACKSLASH
-                        &kp ESCAPE  &kp LEFT_GUI  &kp DELETE  &mo LOWER  &kp SPACE     &kp ENTER        &mo RAISE  &kp BACKSPACE  &kp RGUI   &kp RIGHT_ALT
+&kp ESC         &kp N1  &kp N2      &kp N3        &kp N4   &kp N5                               &kp N6  &kp N7         &kp N8     &kp N9   &kp N0    &kp GRAVE
+&kp TAB         &kp Q   &kp W       &kp E         &kp R    &kp T                                &kp Y   &kp U          &kp I      &kp O    &kp P     &kp LEFT_BRACKET
+&kp LSHFT       &kp A   &kp S       &kp D         &kp F    &kp G                                &kp H   &kp J          &kp K      &kp L    &kp SEMI  &kp SQT
+&kp LCTRL       &kp Z   &kp X       &kp C         &kp V    &kp B      &kp C_MUTE    &kp C_MUTE  &kp N   &kp M          &kp COMMA  &kp DOT  &kp FSLH  &kp RIGHT_BRACKET
+                         &kp LCTRL  &kp LEFT_GUI  &kp LALT &mo LOWER  &kp ENTER     &kp SPACE   &mo RAISE  &kp LEFT_ALT  &kp MINUS  &kp EQUAL
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>;
         };
 
+        // ╔══════════════════════════════════════════════════════════╗
+        // ║  LOWER — раскладка из Sofle                             ║
+        // ║  F-клавиши + цифры + навигация (стрелки) + RGB         ║
+        // ╚══════════════════════════════════════════════════════════╝
         lower_layer {
             label = "lower";
             bindings = <
-&trans          &kp F1     &kp F2     &kp F3       &kp F4    &kp F5                                 &kp F6     &kp F7    &kp F8           &kp F9     &kp F10   &kp F11
-&kp GRAVE       &kp N1     &kp N2     &kp N3       &kp N4    &kp N5                                 &kp N6     &kp N7    &kp N8           &kp N9     &kp N0    &kp F12
-&kp KP_NUMLOCK  &kp EXCL   &kp AT     &kp HASH     &kp DLLR  &kp PRCNT                              &kp CARET  &kp AMPS  &kp KP_MULTIPLY  &kp LPAR   &kp RPAR  &kp PIPE
-&trans          &kp EQUAL  &kp MINUS  &kp KP_PLUS  &kp LBRC  &kp RBRC   &kp C_PLAY_PAUSE    &trans  &kp LBKT   &kp RBKT  &kp SEMI         &kp COLON  &kp BSLH  &trans
-                           &trans     &trans       &trans    &trans     &trans              &trans  &trans     &trans    &trans           &trans
+&kp F1   &kp F2     &kp F3    &kp F4    &kp F5   &kp F6                               &kp F7            &kp F8            &kp F9           &kp F10           &kp F11           &kp F12
+&kp F12  &kp N1     &kp UP    &kp N3    &kp N4   &kp N5                               &rgb_ug RGB_ON    &rgb_ug RGB_OFF   &rgb_ug RGB_HUI  &rgb_ug RGB_HUD   &rgb_ug RGB_SAI   &rgb_ug RGB_SAD
+&trans   &kp LEFT   &kp DOWN  &kp RIGHT &trans   &trans                               &rgb_ug RGB_BRI   &rgb_ug RGB_BRD   &rgb_ug RGB_SPI  &rgb_ug RGB_SPD   &rgb_ug RGB_EFF   &rgb_ug RGB_EFR
+&trans   &trans     &trans    &trans    &trans   &kp DEL  &kp C_PLAY_PAUSE  &trans    &trans            &trans            &trans           &trans            &trans            &trans
+                    &trans    &trans    &trans   &trans   &trans            &trans    &trans            &trans            &trans           &trans
             >;
 
             sensor-bindings = <&inc_dec_kp C_PREVIOUS C_NEXT>;
         };
 
+        // ╔══════════════════════════════════════════════════════════╗
+        // ║  RAISE — раскладка из Sofle                             ║
+        // ║  BT + навигация страниц + стрелки + Del/Bsp            ║
+        // ╚══════════════════════════════════════════════════════════╝
         raise_layer {
             label = "raise";
             bindings = <
-&trans        &trans      &trans     &trans       &trans       &trans                    &trans     &trans    &trans    &trans     &trans   &trans
-&trans        &kp INS     &kp PSCRN  &kp K_CMENU  &trans       &trans                    &kp PG_UP  &kp HOME  &kp UP    &kp END    &trans   &trans
-&kp CAPSLOCK  &trans      &trans     &trans       &trans       &trans                    &kp PG_DN  &kp LEFT  &kp DOWN  &kp RIGHT  &kp DEL  &kp BSPC
-&trans        &kp K_UNDO  &kp K_CUT  &kp K_COPY   &kp K_PASTE  &trans  &trans    &trans  &trans     &trans    &trans    &trans     &trans   &trans
-                          &trans     &trans       &trans       &trans  &trans    &trans  &trans     &trans    &trans    &trans
+&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                  &trans     &trans    &trans    &trans     &trans   &trans
+&trans      &kp INS       &kp PSCRN     &kp K_CMENU   &trans        &trans                         &kp PG_UP  &trans    &kp UP    &trans     &kp N0   &trans
+&trans      &kp LALT      &kp LCTRL     &kp LSHFT     &trans        &kp CLCK                       &kp PG_DN  &kp LEFT  &kp DOWN  &kp RIGHT  &kp DEL  &kp BSPC
+&trans      &kp K_UNDO    &kp K_CUT     &kp K_COPY    &kp K_PASTE   &trans    &trans    &trans     &trans     &trans    &trans    &trans     &trans   &trans
+                          &trans        &trans        &trans        &trans    &trans    &trans     &trans     &trans    &trans    &trans
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PG_DN>;
         };
 
+        // ╔══════════════════════════════════════════════════════════╗
+        // ║  ADJUST — оставлен от Stelmakh (OUT_TOG, BT, RGB)      ║
+        // ╚══════════════════════════════════════════════════════════╝
         adjust_layer {
             label = "adjust";
             bindings = <
