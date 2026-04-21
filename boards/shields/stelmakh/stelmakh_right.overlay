@@ -43,15 +43,14 @@
         rdy-gpios = <&pro_micro 21 GPIO_ACTIVE_HIGH>;
         rst-gpios = <&pro_micro 20 GPIO_ACTIVE_HIGH>;
 
-        sensitivity = <100>;
-        scroll-sensitivity = <50>;
+        sensitivity = <110>;
+        scroll-sensitivity = <10>;
         filter-settings=<0x0B>;
         scroll;
         two-finger-tap;
         single-tap;
         press-and-hold;
         swipes;
-        invert-scroll-y;
         invert-x;
     };
 };
