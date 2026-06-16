@@ -47,7 +47,7 @@
         scroll-sensitivity = <50>;
         filter-settings=<0x01>;
         scroll;
-        two-finger-ta
+        two-finger-tap;
         single-tap;
         invert-x;
     };
